@@ -51,11 +51,13 @@ def get_users():
       search_username = request.args.get('name')
       search_job = request.args.get('job')
       if search_username and search_job:
-         return find_users_by_name_job(search_username, search_job)
+         # return find_users_by_name_job(search_username, search_job)
+         return User().find_by_name_job(search_username, search_job)
       elif search_username:
          users = User().find_by_name(search_username)
       elif search_job:
-         return find_users_by_job(search_job)
+         #return find_users_by_job(search_job)
+         users = User().find_by_job(search_job)
       else:
          users = User().find_all()
       return users
