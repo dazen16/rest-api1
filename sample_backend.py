@@ -16,7 +16,7 @@ def hello_world():
 
 users = { 
    'users_list' :
-   [
+   ["""
       { 
          'id' : 'xyz789',
          'name' : 'Charlie',
@@ -41,7 +41,7 @@ users = {
          'id' : 'zap555', 
          'name': 'Dennis',
          'job': 'Bartender',
-      }
+      }"""
    ]    
 }
 
@@ -75,9 +75,11 @@ def get_users():
       return resp
    elif request.method == 'DELETE':
       userToDel = request.get_json()
-      users['users_list'].remove(userToDel)
-      resp = jsonify(success = True)
-      resp.status_code = 200
+      # users['users_list'].remove(userToDel)
+      delUser = User(userToDel)
+      delUser.remove()
+
+      resp = jsonify(success = True), 200
       return resp
 
 @app.route('/users/<id>')
